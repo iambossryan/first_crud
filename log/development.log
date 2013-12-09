@@ -2173,3 +2173,18 @@ Processing by PostsController#show as HTML
   Rendered comments/_form.html.erb (66.7ms)
   Rendered posts/show.html.erb within layouts/application (319.4ms)
 Completed 200 OK in 358ms (Views: 334.4ms | ActiveRecord: 11.0ms)
+  [1m[36m (22.8ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (81.1ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (1.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreatePosts (20131205084756)
+  [1m[35m (0.4ms)[0m  BEGIN
+  [1m[36m (134.2ms)[0m  [1mCREATE TABLE "posts" ("id" serial primary key, "title" character varying(255), "text" text, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35mSQL (2.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20131205084756"]]
+  [1m[36m (19.2ms)[0m  [1mCOMMIT[0m
+Migrating to CreateComments (20131205092511)
+  [1m[35m (0.6ms)[0m  BEGIN
+  [1m[36m (137.9ms)[0m  [1mCREATE TABLE "comments" ("id" serial primary key, "commenter" character varying(255), "body" text, "post_id" integer, "created_at" timestamp, "updated_at" timestamp) [0m
+  [1m[35m (50.5ms)[0m  CREATE INDEX "index_comments_on_post_id" ON "comments" ("post_id")
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ($1)[0m  [["version", "20131205092511"]]
+  [1m[35m (14.6ms)[0m  COMMIT
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
